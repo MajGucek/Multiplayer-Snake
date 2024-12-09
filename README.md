@@ -1,4 +1,5 @@
 # Multiplayer-Snake
+For localhosting CORS MUST be disabled I use: https://webextension.org/listing/access-control.html
  Starting the node server:<br />
 cd ./server<br />
 npm install<br />
