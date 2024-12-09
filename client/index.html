@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client</title>
+    <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="start-screen" class="screen">
+    <div id="server-response"></div>
+    <input id="name-input" type="text" placeholder="Name...">
+    <input id="room-input" type="text" placeholder="Room...">
+    <button id="FFA-connect-button">FFA</button>
+    <button id="connect-button">Play</button>
+    <input id="new-room-name-input" type="text" placeholder="New room name...">
+    <input id="new-room-speed-input" type="text" placeholder="Speed of the room...">
+    <button id="create-button">Create a room</button>
+</div>
+<div id="game-screen" class="screen">
+    <div class="player self"></div>
+</div>
+<div id="game-over-screen" class="screen">
+    <h1>You're cooked bro 🦨</h1>
+</div>
+
+</body>
+</html>

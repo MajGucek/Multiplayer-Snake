@@ -1,0 +1,147 @@
+:root {
+    --default-display: flex;
+    --bg-color: rgb(12, 117, 152);
+}
+
+* {
+    font-family: 'Helvetica', Arial, Lucida Grande, sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+input {
+    font-size: 2rem;
+    min-width: 15vh;
+    min-height: 7.5vh;
+    width: fit-content;
+    height: fit-content;
+    border: 0.7vh solid grey;
+    background-color: rgb(43, 42, 51);
+    color: white;
+    border-radius: 1vh;
+    margin: 1vh;
+}
+
+
+
+button {
+    color: white;
+    left: 0vh;
+    position: relative;
+    font-size: 2rem;
+    background-color: rgb(55, 147, 183);
+    min-width: 25vh;
+    min-height: 7.5vh;
+    max-width: 100%;
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    margin: 1vh;
+    transition: 100ms;
+    animation-duration: 0.125s;
+    animation-iteration-count: 2;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes denyAnimation {
+    0% {
+        left: 0vh;
+    }
+    25% {
+        left: -1vh;
+    }
+    50% {
+        left: 0vh;
+    }
+    75% {
+        left: 1vh;
+    }
+    100% {
+        left: 0vh;
+    }
+}
+
+button:hover {
+    transition: 100ms;
+    border: 0.5vh solid darkblue;
+    border-radius: 1vh;
+}
+
+.screen {
+    position: fixed;
+    background-color: var(--bg-color);
+    width: 100vh;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    margin-top: -50vh;
+    margin-left: -50vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+#start-screen {
+    display: var(--default-display);
+    width: 100%;
+    left: 0%;
+    margin-left: 0%;
+}
+#game-screen {
+    display: none;
+}
+#game-over-screen {
+    display: none;
+}
+@media screen and (max-width: 768px) {
+    /* mobile */
+    .screen {
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        margin-top: 0;
+        margin-left: 0;
+    }
+    
+    #game-screen {
+        position: fixed;
+        top: 50%;
+        margin-top: -50vw;
+        height: 100vw;
+    }
+}
+
+.player {
+    border-radius: 0.2vh;
+    width: 0vh;
+    height: 0vh;
+    position: absolute;
+    text-align: center;
+    vertical-align: center;
+    overflow: hidden;
+}
+.enemy {
+    background-color: blueviolet;
+}
+.point {
+    background-color: orange;
+}
+.self {
+    background-color: red;
+}
+
+#server-response {
+    z-index: 1;
+    position: fixed;
+    left: 1vh;
+    top: 1vh;
+    color: rgb(249, 64, 64);
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+
+
