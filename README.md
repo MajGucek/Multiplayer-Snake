@@ -1,8 +1,8 @@
 # Multiplayer-Snake
- Starting the node server:
-cd ./server
-npm install
-npm run devStart
- Starting the client
-cd ./client
-npm install
+ Starting the node server:<br />
+cd ./server<br />
+npm install<br />
+npm run devStart<br />
+ Starting the client<br />
+cd ./client<br />
+npm install<br />
