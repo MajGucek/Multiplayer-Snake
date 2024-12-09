@@ -3,7 +3,18 @@ const socket = io("http://localhost:3000", {
 });
 
 let units = "vh";
+let up_key = "KeyW";
+let down_key = "KeyS";
+let left_key = "KeyA";
+let right_key = "KeyD";
 
+if (localStorage.getItem("keyBindings")) {
+  const savedKeys = JSON.parse(localStorage.getItem("keyBindings"));
+  up_key = savedKeys.up_key;
+  down_key = savedKeys.down_key;
+  left_key = savedKeys.left_key;
+  right_key = savedKeys.right_key;
+}
 /* 
   @Source: https://stackoverflow.com/questions/72502079/how-can-i-check-if-the-device-which-is-using-my-website-is-a-mobile-user-or-no
 */
@@ -31,7 +42,6 @@ if (isUserUsingMobile()) {
 console.log(units);
 
 
-const minimap = document.getElementById("minimap");
 const game_screen = document.getElementById("game-screen");
 const server_response = document.getElementById("server-response");
 
@@ -88,6 +98,93 @@ document.getElementById("create-button").onclick = () => {
   req_CreateRoom({room_name: new_room_name, room_speed: new_room_speed});
 }
 
+document.getElementById("settings-button").onclick = () => {
+  document.getElementById("start-screen").style.display = 'none';
+  document.getElementById("settings-screen").style.display = 'var(--default-display)';
+  renderKeyBindings();
+}
+
+document.getElementById("rebind-up").onclick = () => {
+  const button = document.getElementById("rebind-up");
+  button.innerHTML = "Waiting key press...";
+  const keyListener = (e) => {
+    // check for cancelling
+    if (e.code !== "Escape") { 
+
+      button.innerHTML = e.code; // very safe and beautiful
+      up_key = e.code;
+      saveKeyBindings();
+      document.removeEventListener("keydown", keyListener);
+    } else {
+      button.innerHTML = "Click to rebind";
+      document.removeEventListener("keydown", keyListener);
+    }
+  };
+  document.addEventListener("keydown", keyListener);
+};
+
+document.getElementById("rebind-down").onclick = () => {
+  const button = document.getElementById("rebind-down");
+  button.innerHTML = "Waiting key press...";
+  const keyListener = (e) => {
+    // check for cancelling
+    if (e.code !== "Escape") { 
+
+      button.innerHTML = e.code; // very safe and beautiful
+      down_key = e.code;
+      saveKeyBindings();
+      document.removeEventListener("keydown", keyListener);
+    } else {
+      button.innerHTML = "Click to rebind";
+      document.removeEventListener("keydown", keyListener);
+    }
+  };
+  document.addEventListener("keydown", keyListener);
+};
+
+document.getElementById("rebind-left").onclick = () => {
+  const button = document.getElementById("rebind-left");
+  button.innerHTML = "Waiting key press...";
+  const keyListener = (e) => {
+    // check for cancelling
+    if (e.code !== "Escape") { 
+
+      button.innerHTML = e.code; // very safe and beautiful
+      left_key = e.code;
+      saveKeyBindings();
+      document.removeEventListener("keydown", keyListener);
+    } else {
+      button.innerHTML = "Click to rebind";
+      document.removeEventListener("keydown", keyListener);
+    }
+  };
+  document.addEventListener("keydown", keyListener);
+};
+
+document.getElementById("rebind-right").onclick = () => {
+  const button = document.getElementById("rebind-right");
+  button.innerHTML = "Waiting key press...";
+  const keyListener = (e) => {
+    // check for cancelling
+    if (e.code !== "Escape") { 
+
+      button.innerHTML = e.code; // very safe and beautiful
+      right_key = e.code;
+      saveKeyBindings();
+      document.removeEventListener("keydown", keyListener);
+    } else {
+      button.innerHTML = "Click to rebind";
+      document.removeEventListener("keydown", keyListener);
+    }
+  };
+  document.addEventListener("keydown", keyListener);
+};
+
+document.getElementById("back-button").onclick = () => {
+  document.getElementById("settings-screen").style.display = 'none';
+  document.getElementById("start-screen").style.display = 'var(--default-display)';
+};
+
 
 function renderPlayer(player, type = "enemy", name = "") {
   player.body.forEach((part, index) => {
@@ -143,19 +240,19 @@ if (!isUserUsingMobile()) {
   window.addEventListener('keydown', (e) => {
     let interested_input = false;
     let key = "";
-      if (e.code == "KeyW") {
+      if (e.code == up_key) {
         interested_input = true;
         key = "Up";
       }  
-      if (e.code == "KeyS") {
+      if (e.code == down_key) {
         interested_input = true;
         key = "Down";
       }
-      if (e.code == "KeyA") {
+      if (e.code == left_key) {
         interested_input = true;
         key = "Left";
       }
-      if (e.code == "KeyD") {
+      if (e.code == right_key) {
         interested_input = true;
         key = "Right";
       }
@@ -237,4 +334,22 @@ function acceptAnimation(button) {
 
 function scale (number, inMin, inMax, outMin, outMax) {
   return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+}
+
+function saveKeyBindings() {
+  const keyBindings = {
+    up_key,
+    down_key,
+    left_key,
+    right_key,
+  };
+  localStorage.setItem("keyBindings", JSON.stringify(keyBindings));
+  renderKeyBindings();
+}
+
+function renderKeyBindings() {
+  document.getElementById("up-bind").innerHTML = up_key;
+  document.getElementById("down-bind").innerHTML = down_key;
+  document.getElementById("left-bind").innerHTML = left_key;
+  document.getElementById("right-bind").innerHTML = right_key;
 }

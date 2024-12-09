@@ -7,6 +7,7 @@
     <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script defer src="script.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 <div id="start-screen" class="screen">
@@ -18,12 +19,26 @@
     <input id="new-room-name-input" type="text" placeholder="New room name...">
     <input id="new-room-speed-input" type="text" placeholder="Speed of the room...">
     <button id="create-button">Create a room</button>
+    <button id="settings-button"><i class="material-icons" style="font-size: 3rem; padding-top: 0.7rem;">settings</i></button>
 </div>
 <div id="game-screen" class="screen">
     <div class="player self"></div>
 </div>
 <div id="game-over-screen" class="screen">
     <h1>You're cooked bro 🦨</h1>
+</div>
+<div id="settings-screen" class="screen">
+    <p>Up: <button id="rebind-up">Click to Rebind</button></p>
+    <p>Down: <button id="rebind-down">Click to Rebind</button></p>
+    <p>Left: <button id="rebind-left">Click to Rebind</button></p>
+    <p>Right: <button id="rebind-right">Click to Rebind</button></p>
+    <div id="keybinds">
+        <p id="up-bind"></p>
+        <p id="down-bind"></p>
+        <p id="left-bind"></p>
+        <p id="right-bind"></p>
+    </div>
+    <button id="back-button">Back</button>
 </div>
 
 </body>
